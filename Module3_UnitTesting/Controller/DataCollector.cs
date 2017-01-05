@@ -44,6 +44,7 @@ namespace Module3_UnitTesting.Controller
 
         public void GetDate(string prompt, out DateTime date, bool required = true)
         {
+            string userInput = string.Empty;
             date = new DateTime();
 
             bool invalidData = true;
@@ -52,14 +53,16 @@ namespace Module3_UnitTesting.Controller
                 try
                 {
                     consoleUI.WriteLine(prompt);
-                    date = DateTime.Parse(Console.ReadLine());
+                    userInput = consoleUI.ReadLine();
+                    //date = Convert.ToDateTime(userInput);
+                    date = DateTime.Parse(userInput);
                 }
                 catch (Exception e)
                 {
-                    consoleUI.WriteLine(e.Message);
+                    consoleUI.WriteLine(userInput + ": " + e.Message);
                     continue;
                 }
-                Console.WriteLine("date: {0}", date);
+                consoleUI.WriteLine("date: " + date);
                 invalidData = false;
             } while (invalidData && required);
         }

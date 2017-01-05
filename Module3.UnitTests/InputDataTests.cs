@@ -100,9 +100,9 @@ namespace Module3.UnitTests
     [Category("Date Data Tests")]
     class InputDateTests
     {
+        //[TestCase(Globals.VALID_DATE_NUMERIC_EUROPEAN), Ignore("Not dealing with European format at this time.")]
         [TestCase(Globals.VALID_DATE_TEXT), Timeout(Globals.METHOD_TIMEOUT)]
         [TestCase(Globals.VALID_DATE_NUMERIC_AMERICAN)]
-        [TestCase(Globals.VALID_DATE_NUMERIC_EUROPEAN)]
         public void GetDate_NotRequired_ValidInput(string readline)
         {
             DateTime date;
@@ -111,6 +111,48 @@ namespace Module3.UnitTests
             DataCollector dc = new DataCollector(new ConsoleUIMock(readline));
             dc.GetDate(Globals.PROMPT, out date, notRequired);
             Assert.IsTrue(DateTime.Parse(readline) == date);
+        }
+
+        [TestCase(Globals.NULL_STRING), Timeout(Globals.METHOD_TIMEOUT)]
+        [TestCase(Globals.EMPTY_STRING)]
+        [TestCase(Globals.CARRIAGE_RETURN)]
+        [TestCase(Globals.VALID_STRING)]
+        public void GetDate_NotRequired_InvalidInput(string readline)
+        {
+            DateTime outputDate;
+            DateTime expectedDate = new DateTime();
+            bool notRequired = false;
+
+            DataCollector dc = new DataCollector(new ConsoleUIMock(readline));
+            dc.GetDate(Globals.PROMPT, out outputDate, notRequired);
+            Assert.IsTrue(outputDate == expectedDate);
+        }
+
+        //[TestCase(Globals.VALID_DATE_NUMERIC_EUROPEAN), Ignore("Not dealing with European format at this time.")]
+        [TestCase(Globals.VALID_DATE_TEXT), Timeout(Globals.METHOD_TIMEOUT)]
+        [TestCase(Globals.VALID_DATE_NUMERIC_AMERICAN)]
+        public void GetDate_Required_ValidInput(string readline)
+        {
+            DateTime date;
+            bool required = true;
+
+            DataCollector dc = new DataCollector(new ConsoleUIMock(readline));
+            dc.GetDate(Globals.PROMPT, out date, required);
+            Assert.IsTrue(DateTime.Parse(readline) == date);
+        }
+
+        [TestCase(Globals.NULL_STRING), Timeout(Globals.METHOD_TIMEOUT)]
+        [TestCase(Globals.EMPTY_STRING)]
+        [TestCase(Globals.CARRIAGE_RETURN)]
+        [TestCase(Globals.VALID_STRING)]
+        public async void GetDate_Required_InvalidInput(string readline)
+        {
+            DateTime outputDate;
+            bool required = true;
+
+            DataCollector dc = new DataCollector(new ConsoleUIMock(readline));
+            Task task = new Task(() => dc.GetDate(Globals.PROMPT, out outputDate, required));
+            await Globals.TimeoutAfter(task, Globals.TEST_TIMEOUT);
         }
     }
 }
