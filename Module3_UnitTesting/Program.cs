@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Module3_UnitTesting.Controller;
+using Module3_UnitTesting.View;
 
 namespace Module3_UnitTesting
 {
@@ -10,6 +7,12 @@ namespace Module3_UnitTesting
     {
         static void Main(string[] args)
         {
+            ConsoleUI console = new ConsoleUI();
+
+            Student student = new Student();
+
+            console.WriteLine("Press any key to terminate.");
+            console.ReadLine();
         }
     }
 }

@@ -73,7 +73,7 @@ namespace Module3.UnitTests
         [TestCase(Globals.EMPTY_STRING)]
         [TestCase(Globals.CARRIAGE_RETURN)]
         [ExpectedException(typeof(TimeoutException))]
-        public async void GetStringData_Required_InvalidInput(string readline)
+        public async void GetStringData_Required_InvalidInput_ExpectTimeout(string readline)
         {
             bool required = true;
 
@@ -145,7 +145,8 @@ namespace Module3.UnitTests
         [TestCase(Globals.EMPTY_STRING)]
         [TestCase(Globals.CARRIAGE_RETURN)]
         [TestCase(Globals.VALID_STRING)]
-        public async void GetDate_Required_InvalidInput(string readline)
+        [ExpectedException(typeof(TimeoutException))]
+        public async void GetDate_Required_InvalidInput_ExpectTimeout(string readline)
         {
             DateTime outputDate;
             bool required = true;
