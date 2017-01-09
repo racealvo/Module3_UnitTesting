@@ -53,6 +53,15 @@ namespace Module3.UnitTests
         public override string ReadLine() { return readline; }
     }
 
+    class BiographicInfoConcrete: BiographicInfo
+    {
+        public BiographicInfoConcrete(DataCollector dc = null, ConsoleUI ui = null) : base(dc, ui)
+        {
+        }
+
+        public override string BioType { get { return "Test"; } }
+    }
+
     [TestFixture]
     [Category("String Data Tests")]
     class InputDataTests
@@ -154,6 +163,26 @@ namespace Module3.UnitTests
             DataCollector dc = new DataCollector(new ConsoleUIMock(readline));
             Task task = new Task(() => dc.GetDate(Globals.PROMPT, out outputDate, required));
             await Globals.TimeoutAfter(task, Globals.TEST_TIMEOUT);
+        }
+    }
+
+    [TestFixture]
+    [Category("BiographicInfo Tests")]
+    class BiographicInfoTests
+    {
+        [Test]
+        public void Input_ValidData()
+        {
+            string readline = "";
+            string firstName;
+            string lastName;
+            DateTime birthDate;
+
+            ConsoleUIMock ui = new ConsoleUIMock(readline);
+            DataCollector dc = new DataCollector(ui);
+            BiographicInfoConcrete bio = new BiographicInfoConcrete(dc, ui);
+
+            bio.Input(out firstName, out lastName, out birthDate);
         }
     }
 }

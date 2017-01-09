@@ -10,6 +10,7 @@ namespace Module3_UnitTesting
             ConsoleUI console = new ConsoleUI();
 
             Student student = new Student();
+            Teacher teacher = new Teacher();
 
             console.WriteLine("Press any key to terminate.");
             console.ReadLine();

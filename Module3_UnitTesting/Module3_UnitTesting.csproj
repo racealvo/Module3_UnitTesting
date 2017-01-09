@@ -46,6 +46,7 @@
     <Compile Include="Controller\BiographicInfo.cs" />
     <Compile Include="Controller\DataCollector.cs" />
     <Compile Include="Controller\Student.cs" />
+    <Compile Include="Controller\Teacher.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\ConsoleUI.cs" />
