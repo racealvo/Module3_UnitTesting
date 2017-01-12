@@ -166,23 +166,23 @@ namespace Module3.UnitTests
         }
     }
 
-    [TestFixture]
-    [Category("BiographicInfo Tests")]
-    class BiographicInfoTests
-    {
-        [Test]
-        public void Input_ValidData()
-        {
-            string readline = "";
-            string firstName;
-            string lastName;
-            DateTime birthDate;
+    //[TestFixture]
+    //[Category("BiographicInfo Tests")]
+    //class BiographicInfoTests
+    //{
+    //    [Test]
+    //    public void Input_ValidData()
+    //    {
+    //        string readline = "";
+    //        string firstName;
+    //        string lastName;
+    //        DateTime birthDate;
 
-            ConsoleUIMock ui = new ConsoleUIMock(readline);
-            DataCollector dc = new DataCollector(ui);
-            BiographicInfoConcrete bio = new BiographicInfoConcrete(dc, ui);
+    //        ConsoleUIMock ui = new ConsoleUIMock(readline);
+    //        DataCollector dc = new DataCollector(ui);
+    //        BiographicInfoConcrete bio = new BiographicInfoConcrete(dc, ui);
 
-            bio.Input(out firstName, out lastName, out birthDate);
-        }
-    }
+    //        bio.Input(out firstName, out lastName, out birthDate);
+    //    }
+    //}
 }
