@@ -6,8 +6,8 @@ namespace Module3_UnitTesting.Controller
 {
     public abstract class BiographicInfo
     {
-        readonly DataCollector _dc;
-        readonly ConsoleUI _console;
+        readonly IDataCollector _dc;
+        readonly IUserInterface _console;
 
         private string _firstName;
         private string _lastName;
@@ -31,7 +31,7 @@ namespace Module3_UnitTesting.Controller
 
         public abstract string BioType { get; }
 
-        public BiographicInfo(DataCollector dc = null, ConsoleUI ui = null) {
+        public BiographicInfo(DataCollector dc = null, IUserInterface ui = null) {
             _dc = (dc == null) ? new DataCollector() : dc;
             _console = (ui == null) ? new ConsoleUI() : ui;
 
@@ -40,8 +40,8 @@ namespace Module3_UnitTesting.Controller
             Output(_firstName, _lastName, _birthDate.ToString());
         }
 
-        DataCollector dc { get { return _dc; } }
-        ConsoleUI console { get { return _console; } }
+        IDataCollector dc { get { return _dc; } }
+        IUserInterface console { get { return _console; } }
         
         /// <summary>
         /// Get biographic information (student or teacher) - name, birthdate, address

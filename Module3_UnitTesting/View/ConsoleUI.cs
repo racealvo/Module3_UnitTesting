@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace Module3_UnitTesting.View
 {
-    public class ConsoleUI
+    public interface IUserInterface
+    {
+        string ReadLine();
+        void WriteLine(string s);
+    }
+
+    public class ConsoleUI : IUserInterface
     {
         public virtual string ReadLine()
         {

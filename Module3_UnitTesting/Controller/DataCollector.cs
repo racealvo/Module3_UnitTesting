@@ -7,11 +7,23 @@ using System.Threading.Tasks;
 
 namespace Module3_UnitTesting.Controller
 {
-    public class DataCollector
+    public interface IDataCollector
     {
-        readonly ConsoleUI _consoleUI;
+        void GetStringData(string prompt, out string data, bool required = true);
+        void GetDate(string prompt, out DateTime date, bool required = true);
+    }
 
-        public DataCollector(ConsoleUI consoleUI = null)
+    public class DataCollector : IDataCollector
+    {
+        private IUserInterface _consoleUI = null;
+
+        IUserInterface consoleUI
+        {
+            get { return _consoleUI; }
+            set { _consoleUI = value; }
+        }
+
+        public DataCollector(IUserInterface consoleUI = null)
         {
             if (consoleUI == null)
             {
@@ -21,10 +33,6 @@ namespace Module3_UnitTesting.Controller
             {
                 _consoleUI = consoleUI;
             }
-        }
-
-        ConsoleUI consoleUI {
-            get { return _consoleUI; }
         }
 
         /// <summary>
