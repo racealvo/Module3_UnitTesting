@@ -12,6 +12,9 @@ namespace Module3_UnitTesting
             Student student = new Student();
             Teacher teacher = new Teacher();
 
+            student.RunIO();
+            teacher.RunIO();
+
             console.WriteLine("Press any key to terminate.");
             console.ReadLine();
         }

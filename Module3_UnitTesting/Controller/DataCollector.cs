@@ -9,8 +9,8 @@ namespace Module3_UnitTesting.Controller
 {
     public interface IDataCollector
     {
-        void GetStringData(string prompt, out string data, bool required = true);
-        void GetDate(string prompt, out DateTime date, bool required = true);
+        string GetStringData(string prompt, out string data, bool required = true);
+        DateTime GetDate(string prompt, out DateTime date, bool required = true);
     }
 
     public class DataCollector : IDataCollector
@@ -41,16 +41,18 @@ namespace Module3_UnitTesting.Controller
         /// <param name="prompt"></param>
         /// <param name="data"></param>
         /// <param name="required"></param>
-        public void GetStringData(string prompt, out string data, bool required = true)
+        public string GetStringData(string prompt, out string data, bool required = true)
         {
             do
             {
                 consoleUI.WriteLine(prompt);
                 data = consoleUI.ReadLine();
             } while (required && (string.IsNullOrWhiteSpace(data)));
+
+            return data;
         }
 
-        public void GetDate(string prompt, out DateTime date, bool required = true)
+        public DateTime GetDate(string prompt, out DateTime date, bool required = true)
         {
             string userInput = string.Empty;
             date = new DateTime();
@@ -73,6 +75,8 @@ namespace Module3_UnitTesting.Controller
                 consoleUI.WriteLine("date: " + date);
                 invalidData = false;
             } while (invalidData && required);
+
+            return date;
         }
     }
 }

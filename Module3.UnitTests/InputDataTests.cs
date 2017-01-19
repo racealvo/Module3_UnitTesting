@@ -18,6 +18,7 @@ namespace Module3.UnitTests
 
         // Dates
         // Valid
+        public static DateTime VALID_DATE = new DateTime(1980, 11, 30);
         public const string VALID_DATE_TEXT = "Nov 30, 1980";
         public const string VALID_DATE_NUMERIC_AMERICAN = "11/30/1980";
         public const string VALID_DATE_NUMERIC_EUROPEAN = "30/11/1980";
@@ -51,15 +52,6 @@ namespace Module3.UnitTests
         }
 
         public override string ReadLine() { return readline; }
-    }
-
-    class BiographicInfoConcrete: BiographicInfo
-    {
-        public BiographicInfoConcrete(DataCollector dc = null, ConsoleUI ui = null) : base(dc, ui)
-        {
-        }
-
-        public override string BioType { get { return "Test"; } }
     }
 
     [TestFixture]
@@ -166,23 +158,38 @@ namespace Module3.UnitTests
         }
     }
 
+    public class FakeDataCollector : IDataCollector
+    {
+        public string GetStringData(string prompt, out string data, bool required = true)
+        {
+            data = Globals.VALID_STRING;
+            return Globals.VALID_STRING;
+        }
+
+        public DateTime GetDate(string prompt, out DateTime date, bool required = true)
+        {
+            date = Globals.VALID_DATE;
+            return Globals.VALID_DATE;
+        }
+    }
+
     [TestFixture]
     [Category("BiographicInfo Tests")]
     class BiographicInfoTests
     {
+
         [Test]
         public void Input_ValidData()
         {
-            string readline = "";
-            string firstName;
-            string lastName;
-            DateTime birthDate;
+            IDataCollector dc = new FakeDataCollector();
 
-            ConsoleUIMock ui = new ConsoleUIMock(readline);
-            DataCollector dc = new DataCollector(ui);
-            BiographicInfoConcrete bio = new BiographicInfoConcrete(dc, ui);
+            IBiographicInfo bio = new BiographicInfo();
+            bio.DataCollect = dc;
+            bio.Input();
 
-            bio.Input(out firstName, out lastName, out birthDate);
+            Assert.AreEqual(bio.FirstName, Globals.VALID_STRING);
+            Assert.AreEqual(bio.LastName, Globals.VALID_STRING);
+            Assert.AreEqual(bio.BirthDate, Globals.VALID_DATE);
         }
     }
 }

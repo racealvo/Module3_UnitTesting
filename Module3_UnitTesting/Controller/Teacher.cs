@@ -8,6 +8,9 @@ namespace Module3_UnitTesting.Controller
 {
     public class Teacher : BiographicInfo
     {
-        public override string BioType { get { return "Teacher"; } }
+        public Teacher()
+        {
+            base.BioType = "Teacher";
+        }
     }
 }
